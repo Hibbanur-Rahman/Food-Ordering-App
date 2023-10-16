@@ -1,4 +1,4 @@
-export const actionType = {
+const actionType = {
   SET_USER: "SET_USER",
   SET_FOOD_ITEMS: "SET_FOOD_ITEMS",
   SET_CART_SHOW: "SET_CART_SHOW",
@@ -38,4 +38,4 @@ const reducer = (state, action) => {
   }
 };
 
-export default reducer;
+export {reducer,actionType};

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { RiRefreshFill } from "react-icons/ri";
 
@@ -7,6 +7,9 @@ import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import EmptyCart from "../components/img/emptyCart.svg";
 import CartItem from "./CartItem";
+
+import emailjs from '@emailjs/browser';
+
 
 const CartContainer = () => {
   const [{ cartShow, cartItems, user }, dispatch] = useStateValue();
@@ -36,6 +39,25 @@ const CartContainer = () => {
 
     localStorage.setItem("cartItems", JSON.stringify([]));
   };
+
+  const form = useRef();
+  const sendEmail = (Totalprice,cartItems) => {
+    const templateParams = {
+      to_email: 'recipient@example.com',
+      customVariable: 'This is a custom value',
+      TotalPrice:Totalprice,
+      CartItems:cartItems[0].id
+    };
+
+    emailjs.send('service_3hb6rnp', 'template_bitptjn', templateParams, 'WvxDwDO4L3oPSV9lf')
+      .then((response) => {
+        console.log('Email sent successfully:', response);
+      })
+      .catch((error) => {
+        console.error('Email sending failed:', error);
+      });
+  }
+
 
   return (
     <motion.div
@@ -99,12 +121,14 @@ const CartContainer = () => {
 
             {user ? (
               <motion.button
+                onClick={() =>sendEmail(tot,cartItems)}
                 whileTap={{ scale: 0.8 }}
                 type="button"
                 className="w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg"
               >
                 Check Out
               </motion.button>
+
             ) : (
               <motion.button
                 whileTap={{ scale: 0.8 }}

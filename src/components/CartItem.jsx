@@ -3,7 +3,7 @@ import { BiMinus, BiPlus } from "react-icons/bi";
 import { motion } from "framer-motion";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
-import { fetchCart } from "../utils/fetchLocalData.js";
+// import { fetchCart } from "../utils/fetchLocalData.js";
 let items = [];
 
 const CartItem = ({ item, setFlag, flag }) => {

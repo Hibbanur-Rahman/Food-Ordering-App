@@ -10,7 +10,8 @@ import { Route, Routes } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useStateValue } from "./context/StateProvider";
 import { getAllFoodItems } from "./utils/firebaseFunctions";
-import { actionType } from "./context/reducer";
+import { actionType } from './context/reducer';
+
 const App = () => {
   const [{}, dispatch] = useStateValue();
   const fetchData = async () => {
